@@ -2,7 +2,7 @@ using System.Numerics;
 using UnityEngine;
 
 public enum Direction {
-    UP, DOWN, LEFT, RIGHT, UL, UR, DL, DR, INVALID
+    UP, DOWN, LEFT, RIGHT, /*UL, UR, DL, DR,*/ INVALID
 }
 
 public static class DirectionEx {
@@ -17,14 +17,14 @@ public static class DirectionEx {
             case Direction.RIGHT:
                 return Vector2Int.right;
 
-            case Direction.UL:
+            /*case Direction.UL:
                 return Vector2Int.up + Vector2Int.left;
             case Direction.UR:
                 return Vector2Int.up + Vector2Int.right;
             case Direction.DL:
                 return Vector2Int.down + Vector2Int.left;
             case Direction.DR:
-                return Vector2Int.down + Vector2Int.right;
+                return Vector2Int.down + Vector2Int.right;*/
             
             default:
                 return Vector2Int.one * int.MaxValue;
@@ -42,14 +42,14 @@ public static class DirectionEx {
         if (offset == Direction.RIGHT.Off())
             return Direction.RIGHT;
 
-        if (offset == Direction.UL.Off())
+        /*if (offset == Direction.UL.Off())
             return Direction.UL;
         if (offset == Direction.UL.Off())
             return Direction.UR;
         if (offset == Direction.UL.Off())
             return Direction.DL;
         if (offset == Direction.UL.Off())
-            return Direction.DR;
+            return Direction.DR;*/
 
         return Direction.INVALID;
     }
