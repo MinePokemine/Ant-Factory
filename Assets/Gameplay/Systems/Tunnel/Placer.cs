@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TunnelPlacer : MonoBehaviour {
@@ -23,7 +22,7 @@ public class TunnelPlacer : MonoBehaviour {
                 Debug.Log("New Tunnel");
                 tunnels.Add(new Tunnel(curr, pos));
             }
-            
+
             curr = pos;
         } else {
             curr = Vector2Int.one * int.MaxValue;

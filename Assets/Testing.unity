@@ -167,8 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af7cd984bac4a46c1b6123ddfed61210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GridSystem
-  corner: {x: 0, y: 0}
-  scale: {x: 0, y: 0}
+  corner: {x: 10, y: 5}
+  scale: {x: 1, y: 1}
   offset: {x: 0, y: 0}
 --- !u!114 &171918620
 MonoBehaviour:
