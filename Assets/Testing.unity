@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 171918620}
   - component: {fileID: 171918619}
   - component: {fileID: 171918623}
+  - component: {fileID: 171918624}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -210,7 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TunnelPlacer
   tunnels: {fileID: 171918620}
   grid: {fileID: 171918619}
-  mainCamera: {fileID: 519420031}
+  main: {fileID: 0}
   input: {fileID: 171918623}
 --- !u!114 &171918623
 MonoBehaviour:
@@ -224,6 +225,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9022845d09b654d2389a1b8b23bbfbb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+--- !u!114 &171918624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171918617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31362f1e0f27b495fb24ffb9082d5dd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Breaker
+  tunnels: {fileID: 171918620}
+  input: {fileID: 171918623}
+  grid: {fileID: 171918619}
+  main: {fileID: 519420031}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

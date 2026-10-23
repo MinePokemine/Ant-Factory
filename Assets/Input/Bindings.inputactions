@@ -25,6 +25,16 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "CollapseTunnel",
+                    "type": "Button",
+                    "id": "65a75850-6e02-47b8-97f2-8ccae0fd5444",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -47,6 +57,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "DigTunnel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff3a2f5f-b7e3-4494-828c-43d28c183f6e",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "CollapseTunnel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

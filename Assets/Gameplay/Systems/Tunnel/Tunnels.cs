@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,23 @@ public class Tunnels : MonoBehaviour {
         return tunnels.Where(x => (x.pos1 == pos || x.pos2 == pos)).ToArray();
     }
 
+    public Tunnel[] Where(Func<Tunnel, bool> where) {
+        return tunnels.Where(where).ToArray();
+    }
+
     public void Add(Tunnel tunnel) {
         tunnels.Add(tunnel);
     }
 
     public Tunnel[] GetArray() {
         return tunnels.ToArray();
+    }
+
+    public void Remove(Tunnel tunnel) {
+        tunnels.Remove(tunnel);
+    }
+
+    public void Remove(Tunnel[] ts) {
+        tunnels.RemoveWhere(x => ts.Contains(x));
     }
 }

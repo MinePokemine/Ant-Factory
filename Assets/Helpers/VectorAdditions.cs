@@ -19,4 +19,7 @@ public static class VectorEx {
     public static Vector3 Expand(this Vector2 xy) {
         return Expand(xy, 0);
     }
+    public static Vector2 XY(this Vector3 xyz) {
+        return new Vector2(xyz.x, xyz.y);
+    }
 }

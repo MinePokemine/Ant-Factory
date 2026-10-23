@@ -3,14 +3,20 @@ using UnityEngine;
 public class TunnelPlacer : MonoBehaviour {
     public Tunnels tunnels;
     public GridSystem grid;
-    public Camera mainCamera;
+    public Camera main;
     public InputHandler input;
 
     Vector2Int curr = Vector2Int.one * int.MaxValue;
 
+    void Start() {
+        if (main == null) {
+            main = Camera.main;
+        }
+    }
+
     void Update() {
         if (input.digging) { // Placements
-            Vector2 worldPos = mainCamera.ScreenToWorldPoint(input.mousePos);
+            Vector2 worldPos = main.ScreenToWorldPoint(input.mousePos);
             Vector2Int pos = grid.Abstract(worldPos);
             //Debug.Log("Digging at grid " + pos + " - world" + worldPos);
 

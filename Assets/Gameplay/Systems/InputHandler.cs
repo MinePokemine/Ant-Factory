@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,12 +7,14 @@ public class InputHandler : MonoBehaviour {
 
     InputAction mousePosAction;
     InputAction digTunnelAction;
+    InputAction breakTunnelAction;
 
     void OnEnable() {
         key = new Key();
 
         mousePosAction = key.Solving.CurserPosition; mousePosAction.Enable();
         digTunnelAction = key.Solving.DigTunnel; digTunnelAction.Enable();
+        breakTunnelAction = key.Solving.CollapseTunnel; breakTunnelAction.Enable();
     }
 
     void OnDisable() {
@@ -27,5 +30,12 @@ public class InputHandler : MonoBehaviour {
     public bool digging => Digging();
     bool Digging() {
         return digTunnelAction.IsInProgress();
+    }   
+    public void DigPerformed(Action<InputAction.CallbackContext> func) {
+        digTunnelAction.performed += func;
+    }
+
+    public void CollapsePerformed(Action<InputAction.CallbackContext> func) {
+        breakTunnelAction.performed += func;
     }
 }

@@ -111,6 +111,16 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""initialStateCheck"": false,
                     ""priority"": 0
+                },
+                {
+                    ""name"": ""CollapseTunnel"",
+                    ""type"": ""Button"",
+                    ""id"": ""65a75850-6e02-47b8-97f2-8ccae0fd5444"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
                 }
             ],
             ""bindings"": [
@@ -133,6 +143,17 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""DigTunnel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ff3a2f5f-b7e3-4494-828c-43d28c183f6e"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""CollapseTunnel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -206,6 +227,7 @@ public partial class @Key: IInputActionCollection2, IDisposable
         m_Solving = asset.FindActionMap("Solving", throwIfNotFound: true);
         m_Solving_CurserPosition = m_Solving.FindAction("CurserPosition", throwIfNotFound: true);
         m_Solving_DigTunnel = m_Solving.FindAction("DigTunnel", throwIfNotFound: true);
+        m_Solving_CollapseTunnel = m_Solving.FindAction("CollapseTunnel", throwIfNotFound: true);
     }
 
     ~@Key()
@@ -288,6 +310,7 @@ public partial class @Key: IInputActionCollection2, IDisposable
     private List<ISolvingActions> m_SolvingActionsCallbackInterfaces = new List<ISolvingActions>();
     private readonly InputAction m_Solving_CurserPosition;
     private readonly InputAction m_Solving_DigTunnel;
+    private readonly InputAction m_Solving_CollapseTunnel;
     /// <summary>
     /// Provides access to input actions defined in input action map "Solving".
     /// </summary>
@@ -307,6 +330,10 @@ public partial class @Key: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Solving/DigTunnel".
         /// </summary>
         public InputAction @DigTunnel => m_Wrapper.m_Solving_DigTunnel;
+        /// <summary>
+        /// Provides access to the underlying input action "Solving/CollapseTunnel".
+        /// </summary>
+        public InputAction @CollapseTunnel => m_Wrapper.m_Solving_CollapseTunnel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -339,6 +366,9 @@ public partial class @Key: IInputActionCollection2, IDisposable
             @DigTunnel.started += instance.OnDigTunnel;
             @DigTunnel.performed += instance.OnDigTunnel;
             @DigTunnel.canceled += instance.OnDigTunnel;
+            @CollapseTunnel.started += instance.OnCollapseTunnel;
+            @CollapseTunnel.performed += instance.OnCollapseTunnel;
+            @CollapseTunnel.canceled += instance.OnCollapseTunnel;
         }
 
         /// <summary>
@@ -356,6 +386,9 @@ public partial class @Key: IInputActionCollection2, IDisposable
             @DigTunnel.started -= instance.OnDigTunnel;
             @DigTunnel.performed -= instance.OnDigTunnel;
             @DigTunnel.canceled -= instance.OnDigTunnel;
+            @CollapseTunnel.started -= instance.OnCollapseTunnel;
+            @CollapseTunnel.performed -= instance.OnCollapseTunnel;
+            @CollapseTunnel.canceled -= instance.OnCollapseTunnel;
         }
 
         /// <summary>
@@ -475,5 +508,12 @@ public partial class @Key: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDigTunnel(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "CollapseTunnel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCollapseTunnel(InputAction.CallbackContext context);
     }
 }
