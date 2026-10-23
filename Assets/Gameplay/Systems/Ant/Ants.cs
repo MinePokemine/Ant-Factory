@@ -5,6 +5,7 @@ public class Ants : MonoBehaviour {
     public GridSystem gridSys;
     List<Ant> ants;
     int[,] grid;
+    public Tunnels tunnels;
 
     void OnEnable() {
         grid = new int[gridSys.corner.x * 2, gridSys.corner.y * 2];
@@ -31,6 +32,9 @@ public class Ants : MonoBehaviour {
     public Ant Get(Vector2Int pos) {
         if (GetGrid(pos) == -1) return null;
         return ants[GetGrid(pos)];
+    }
+    public Ant[] GetAll() {
+        return ants.ToArray();
     }
     public bool Add(Vector2Int pos, Ant ant) {
         if (ants.Contains(ant)) {
