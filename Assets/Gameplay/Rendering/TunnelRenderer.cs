@@ -24,7 +24,7 @@ public class TunnelRenderer : MonoBehaviour {
 
     void RenderTick() {
         foreach (LineRenderer r in rs) {
-            Destroy(r);
+            Destroy(r.gameObject);
         }
         rs.Clear();
         foreach (Tunnel t in tunnels.GetArray()) {
