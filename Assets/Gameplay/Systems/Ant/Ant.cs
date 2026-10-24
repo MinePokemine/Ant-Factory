@@ -6,6 +6,10 @@ public abstract class Ant : MonoBehaviour {
     public Tunnels tunnels;
     public GridSystem grid;
 
+    void Start() {
+        position = grid.Abstract(transform.position);
+    }
+
     protected (bool, bool) Move(Vector2Int end, bool allowOverride = false) {
         return ants.Move(position, end, allowOverride);
     }
