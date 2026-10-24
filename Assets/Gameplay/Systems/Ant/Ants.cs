@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Ants : MonoBehaviour {
     public GridSystem gridSys;
-    List<Ant> ants;
+    List<Ant> ants = new();
     int[,] grid;
     public Tunnels tunnels;
 
@@ -36,7 +36,8 @@ public class Ants : MonoBehaviour {
     public Ant[] GetAll() {
         return ants.ToArray();
     }
-    public bool Add(Vector2Int pos, Ant ant) {
+    public bool Add(Ant ant) {
+        Vector2Int pos = ant.position;
         if (ants.Contains(ant)) {
             return false;
         }

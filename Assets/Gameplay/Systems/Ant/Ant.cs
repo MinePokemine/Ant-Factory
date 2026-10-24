@@ -8,6 +8,7 @@ public abstract class Ant : MonoBehaviour {
 
     void Start() {
         position = grid.Abstract(transform.position);
+        ants.Add(this);
     }
 
     protected (bool, bool) Move(Vector2Int end, bool allowOverride = false) {

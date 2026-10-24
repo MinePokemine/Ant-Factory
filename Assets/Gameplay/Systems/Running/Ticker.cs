@@ -4,7 +4,7 @@ using UnityEngine;
 public class Ticker : MonoBehaviour {
     public Ants ants;
     public float tickLength;
-    float time;
+    float time = 0;
 
     void Update() {
         time += Time.deltaTime;
