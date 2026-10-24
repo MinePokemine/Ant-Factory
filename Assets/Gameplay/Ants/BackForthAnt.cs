@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackForthAnt : Ant {
     Tunnel previous;
-    public override void Tick() {
+    protected override void UniqueTick() {
         Tunnel[] adjacent = tunnels.Touching(position);
         if (adjacent.Length > 2) {
             MoveAlong(previous);

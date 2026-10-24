@@ -603,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TunnelRenderer
   tunnels: {fileID: 171918620}
   grid: {fileID: 171918619}
-  UpdateTime: 1
+  UpdateTime: 0.1
   Width: 0.2
   colorGradient:
     serializedVersion: 2
