@@ -25,10 +25,10 @@ public abstract class Ant : MonoBehaviour {
         return (false, true);
     }
 
-    protected abstract void UniqueTick();
+    protected abstract void UniqueTick(Tunnels tunnels);
 
-    public void Tick() {
-        UniqueTick();
+    public void Tick(Tunnels tunnels) {
+        UniqueTick(tunnels);
         transform.position = grid.Get3D(position);
     }
 }

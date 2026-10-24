@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackForthAnt : Ant {
     Tunnel previous;
-    protected override void UniqueTick() {
+    protected override void UniqueTick(Tunnels tunnels) {
         Tunnel[] adjacent = tunnels.Touching(position);
         if (adjacent.Length > 2 || adjacent.Length == 1) {
             Debug.Log("Moving Back");

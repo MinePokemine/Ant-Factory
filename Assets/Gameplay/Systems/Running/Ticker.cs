@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Ticker : MonoBehaviour {
     public Ants ants;
+    public Tunnels tunnels;
     public float tickLength;
     float time = 0;
 
@@ -16,7 +17,7 @@ public class Ticker : MonoBehaviour {
 
     void Tick() {
         foreach (Ant ant in ants.GetAll()) {
-            ant.Tick();
+            ant.Tick(tunnels);
         }
     }
 }
