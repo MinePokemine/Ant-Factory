@@ -34,4 +34,8 @@ public struct Tunnel : IEquatable<Tunnel> {
         int b = pos2.GetHashCode();
         return a ^ b; // Bitwise XOR
     }
+
+    public override string ToString() {
+        return $"{pos1}, {pos2} along {dir}";
+    }
 }
