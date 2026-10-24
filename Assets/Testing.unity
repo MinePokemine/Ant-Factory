@@ -254,8 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8580443c40fc446b9b0fe9cfca48bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Ants
-  gridSys: {fileID: 0}
-  tunnels: {fileID: 0}
+  gridSys: {fileID: 171918619}
+  tunnels: {fileID: 171918620}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +739,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Runner
   ants: {fileID: 171918625}
+  tunnels: {fileID: 171918620}
   tickLen: 1
 --- !u!4 &1167552726
 Transform:
@@ -890,7 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BackForthAnt
   position: {x: 0, y: 0}
   ants: {fileID: 171918625}
-  tunnels: {fileID: 171918620}
+  tunnels: {fileID: 0}
   grid: {fileID: 171918619}
 --- !u!212 &1421178156
 SpriteRenderer:
