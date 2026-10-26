@@ -67,37 +67,41 @@ public class Ants : MonoBehaviour {
     public bool Add(Ant ant) {
         Vector2Int pos = ant.position;
         if (ants.Contains(ant)) {
-            return true;
+            return true; // Error
         }
         ants.Add(ant);
         grid[pos.x + gridSys.corner.x, pos.y + gridSys.corner.y] = ants.Count - 1;
-        return true;
+        return false; // No Error
     }
-    public (bool, bool) Move(Vector2Int start, Vector2Int end, bool allowOverride = false) { // (override / would override, other error)
+    public (bool, bool) Move(Vector2Int start, Vector2Int end, bool allowOverride = false) { // (override / would override, stopped execution)
         Ant endA = Get(end);
         bool over = false;
         if (endA != null) {
             over = true;
             if (!allowOverride) {
-                return (true, false); // Override, no other error
+                Debug.Log("Fatal Override");
+                return (over, true);
             }
         }
         Ant startA = Get(start);
         if (startA == null) {
-            return (over, true); // No override, other error (no ant at starting position)
+            Debug.Log("No ant at start");
+            return (over, true);
         }
 
         (int cell, bool error) = GetGrid(start);
         if (error) {
+            Debug.Log("Error getting grid");
             return (over, true);
         }
 
         error = SetGrid(end, cell);
         if (error) {
+            Debug.Log("Error Setting Grid");
             return (over, true);
         }
 
-        return (over, false); // Maybe override (no fatal override), no error
+        return (over, false);
     }
 
     public bool InBounds(Vector2Int arrayPos) {

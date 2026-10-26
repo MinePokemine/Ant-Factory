@@ -23,6 +23,7 @@ public abstract class Ant : MonoBehaviour {
         if (tunnel.pos2 == position) {
             return ants.Move(position, tunnel.pos1, allowOverride);
         }
+        Debug.Log("Ant at " + position + " not on tunnel " + tunnel);
         return (false, true);
     }
 
