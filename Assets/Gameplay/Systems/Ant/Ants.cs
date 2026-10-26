@@ -18,13 +18,14 @@ public class Ants : MonoBehaviour {
 
     // Helpers
     Vector2Int ArrayPos(Vector2Int gridPos) {
-        return gridPos - gridSys.corner;
+        return gridPos + gridSys.corner;
     }
     Vector2Int GridPos(Vector2Int arrayPos) {
-        return arrayPos + gridSys.corner;
+        return arrayPos - gridSys.corner;
     }
     (int, bool) GetArr(Vector2Int arrayPos) {
         if (InBounds(arrayPos)) {
+            Debug.Log(arrayPos);
             return (grid[arrayPos.x, arrayPos.y], false);
         } else {
             return (0, true);
