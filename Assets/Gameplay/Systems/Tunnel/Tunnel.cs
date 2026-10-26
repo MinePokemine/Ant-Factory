@@ -38,4 +38,6 @@ public struct Tunnel : IEquatable<Tunnel> {
     public override string ToString() {
         return $"{pos1}, {pos2} along {dir}";
     }
+
+    public static Tunnel NULL = new Tunnel(Vector2Int.one * int.MaxValue, Direction.INVALID);
 }
