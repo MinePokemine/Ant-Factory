@@ -25,9 +25,9 @@ public class Ants : MonoBehaviour {
     }
     (int, bool) GetArr(Vector2Int arrayPos) {
         if (InBounds(arrayPos)) {
-            Debug.Log(arrayPos);
             return (grid[arrayPos.x, arrayPos.y], false);
         } else {
+            Debug.Log("Array Position out of bounds: " + arrayPos);
             return (0, true);
         }
     }
@@ -47,11 +47,12 @@ public class Ants : MonoBehaviour {
         return SetArr(ArrayPos(gridPos), val);
     }
 
+
     // Public
-    public Ant Get(Vector2Int pos) {
+    public (Ant, bool) GetAnt(Vector2Int pos) { // Grid Position -> Ant, Error
         (int cell, bool success) = GetGrid(pos);
-        if (!success || cell == -1) return null;
-        return ants[cell];
+        if (!success) return (null, true);
+        return (ants[cell], false);
     }
     public Ant[] GetAll() {
         return ants.ToArray();
@@ -79,23 +80,23 @@ public class Ants : MonoBehaviour {
         return false;
     }
     public (bool, bool) Move(Vector2Int start, Vector2Int end, bool allowOverride = false) { // (override / would override, stopped execution)
-        Ant endA = Get(end);
+        (Ant endA, bool error) = GetAnt(end);
         bool over = false;
-        if (endA != null) {
+        if (!error) {
             over = true;
             if (!allowOverride) {
                 Debug.Log("Fatal Override");
                 return (over, true);
             }
         }
-        Ant startA = Get(start);
-        if (startA == null) {
+        (Ant startA, bool error1) = GetAnt(start);
+        if (error1) {
             Debug.Log("No ant at start");
             return (over, true);
         }
 
-        (int cell, bool error) = GetGrid(start);
-        if (error) {
+        (int cell, bool error2) = GetGrid(start);
+        if (error2) {
             Debug.Log("Error getting grid");
             return (over, true);
         }
