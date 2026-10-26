@@ -9,6 +9,11 @@ public class Ants : MonoBehaviour {
 
     void OnEnable() {
         grid = new int[gridSys.corner.x * 2, gridSys.corner.y * 2];
+        for (int x = 0; x < gridSys.corner.x * 2; x++) {
+            for (int y = 0; y < gridSys.corner.y * 2; y++) {
+                grid[x,y] = -1;
+            }
+        }
     }
 
     // Helpers
