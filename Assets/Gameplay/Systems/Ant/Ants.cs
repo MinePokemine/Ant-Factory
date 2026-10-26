@@ -15,23 +15,45 @@ public class Ants : MonoBehaviour {
     Vector2Int ArrayPos(Vector2Int gridPos) {
         return gridPos - gridSys.corner;
     }
-    int GetArr(Vector2Int arrayPos) {
-        return grid[arrayPos.x, arrayPos.y];
+    Vector2Int GridPos(Vector2Int arrayPos) {
+        return arrayPos + gridSys.corner;
     }
-    void SetArr(Vector2Int arrayPos, int val) {
-        grid[arrayPos.x, arrayPos.y] = val;
+    (int, bool) GetArr(Vector2Int arrayPos) {
+        if (InBounds(arrayPos)) {
+            return (grid[arrayPos.x, arrayPos.y], true);
+        } else {
+            return (0, false);
+        }
     }
-    int GetGrid(Vector2Int gridPos) {
-        return GetArr(ArrayPos(gridPos));
+    bool SetArr(Vector2Int arrayPos, int val) {
+        if (InBounds(arrayPos)) {
+            grid[arrayPos.x, arrayPos.y] = val;
+            return true;
+        } else {
+            return false;
+        }
     }
-    void SetGrid(Vector2Int gridPos, int val) {
-        SetArr(ArrayPos(gridPos), val);
+    (int, bool) GetGrid(Vector2Int gridPos) {
+        if (gridSys.InBounds(gridPos)) {
+            return GetArr(ArrayPos(gridPos));
+        } else {
+            return (0, false);
+        }
+    }
+    bool SetGrid(Vector2Int gridPos, int val) {
+        if (gridSys.InBounds(gridPos)) {
+            SetArr(ArrayPos(gridPos), val);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Public
     public Ant Get(Vector2Int pos) {
-        if (GetGrid(pos) == -1) return null;
-        return ants[GetGrid(pos)];
+        (int cell, bool success) = GetGrid(pos);
+        if (!success || cell == -1) return null;
+        return ants[cell];
     }
     public Ant[] GetAll() {
         return ants.ToArray();
@@ -59,9 +81,20 @@ public class Ants : MonoBehaviour {
             return (over, true); // No override, other error (no ant at starting position)
         }
 
-        SetGrid(end, GetGrid(start));
+        (int cell, bool success) = GetGrid(start);
+        if (!success) {
+            return (over, true);
+        }
+
+        success = SetGrid(end, cell);
+        if (!success) {
+            return (over, true);
+        }
 
         return (over, false); // Maybe override (no fatal override), no error
     }
 
+    public bool InBounds(Vector2Int arrayPos) {
+        return gridSys.InBounds(GridPos(arrayPos));
+    }
 }
