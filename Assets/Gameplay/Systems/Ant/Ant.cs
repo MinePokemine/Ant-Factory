@@ -8,6 +8,7 @@ public abstract class Ant : MonoBehaviour {
 
     void Start() {
         position = grid.Abstract(transform.position);
+        Debug.Log(position);
         ants.Add(this);
     }
 
