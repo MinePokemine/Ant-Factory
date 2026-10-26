@@ -5,6 +5,7 @@ Shader "Custom/Grid"
         [MainColor] _BaseColor("Base Color", Color) = (1, 1, 1, 1)
         [MainTexture] _BaseMap("Base Map", 2D) = "white" {}
         _Grid("Grid Size", Vector) = (10,5,0,0)
+        _Width("Line Width", Float) = 0.1
     }
 
     SubShader
@@ -39,6 +40,7 @@ Shader "Custom/Grid"
                 half4 _BaseColor;
                 float4 _BaseMap_ST;
                 float2 _Grid;
+                float _Width;
             CBUFFER_END
 
             Varyings vert(Attributes IN) {
@@ -60,9 +62,9 @@ Shader "Custom/Grid"
                     cellOffset.y += 0.5;
                 }
 
-                cellOffset = cellOffset % 1;
+                cellOffset = (cellOffset + (0.5 * _Width)) % 1;
 
-                if (cellOffset.x < 0.1 || cellOffset.y < 0.1) {
+                if (cellOffset.x < _Width || cellOffset.y < _Width) {
                     return 1;
                 }
                 return 0;
