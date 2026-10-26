@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Ants : MonoBehaviour {
     public GridSystem gridSys;
-    List<Ant> ants = new();
-    int[,] grid;
+    public List<Ant> ants {get; private set;} = new();
+    public int[,] grid {get; private set;}
     public Tunnels tunnels;
 
     void OnEnable() {
@@ -73,8 +73,8 @@ public class Ants : MonoBehaviour {
             Debug.Log("Error Getting Grid at Ants Position");
             return true;
         }
-        if (existing == -1) {
-            Debug.Log("Already Ant Here");
+        if (existing != -1) {
+            Debug.Log("Already Ant Here: Ant #" + existing);
             return true;
         }
         error = SetGrid(ant.position, ants.Count);
