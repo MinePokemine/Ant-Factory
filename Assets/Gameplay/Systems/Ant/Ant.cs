@@ -9,7 +9,10 @@ public abstract class Ant : MonoBehaviour {
     void Start() {
         position = grid.Abstract(transform.position);
         Debug.Log(position);
-        ants.Add(this);
+        bool error = ants.Add(this);
+        if (error) {
+            Debug.Log("Error adding ant to ants");
+        }
     }
 
     protected (bool, bool) Move(Vector2Int end, bool allowOverride = false) {

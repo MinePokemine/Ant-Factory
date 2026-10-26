@@ -65,13 +65,26 @@ public class Ants : MonoBehaviour {
         return ants.ToArray();
     }
     public bool Add(Ant ant) {
-        Vector2Int pos = ant.position;
         if (ants.Contains(ant)) {
             return true; // Error
         }
+        (int existing, bool error) = GetGrid(ant.position);
+        if (error) {
+            Debug.Log("Error Getting Grid at Ants Position");
+            return true;
+        }
+        if (existing == -1) {
+            Debug.Log("Already Ant Here");
+            return true;
+        }
+        error = SetGrid(ant.position, ants.Count);
+        if (error) {
+            Debug.Log("Error Setting Grid to Add Ant");
+            return true;
+        }
         ants.Add(ant);
-        grid[pos.x + gridSys.corner.x, pos.y + gridSys.corner.y] = ants.Count - 1;
-        return false; // No Error
+
+        return false;
     }
     public (bool, bool) Move(Vector2Int start, Vector2Int end, bool allowOverride = false) { // (override / would override, stopped execution)
         Ant endA = Get(end);
