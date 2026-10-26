@@ -15,7 +15,7 @@ public class BackForthAnt : Ant {
                 }
             }
         }
-        if (adjacent.Length > 2 || adjacent.Length == 1) {
+        else if (adjacent.Length > 2 || adjacent.Length == 1) {
             Debug.Log("Moving back along " + previous);
 
             (bool over, bool error) = MoveAlong(previous);
