@@ -20,24 +20,24 @@ public class Ants : MonoBehaviour {
     }
     (int, bool) GetArr(Vector2Int arrayPos) {
         if (InBounds(arrayPos)) {
-            return (grid[arrayPos.x, arrayPos.y], true);
+            return (grid[arrayPos.x, arrayPos.y], false);
         } else {
-            return (0, false);
+            return (0, true);
         }
     }
     bool SetArr(Vector2Int arrayPos, int val) {
         if (InBounds(arrayPos)) {
             grid[arrayPos.x, arrayPos.y] = val;
-            return true;
-        } else {
             return false;
+        } else {
+            return true;
         }
     }
     (int, bool) GetGrid(Vector2Int gridPos) {
         if (gridSys.InBounds(gridPos)) {
             return GetArr(ArrayPos(gridPos));
         } else {
-            return (0, false);
+            return (0, true);
         }
     }
     bool SetGrid(Vector2Int gridPos, int val) {
@@ -61,7 +61,7 @@ public class Ants : MonoBehaviour {
     public bool Add(Ant ant) {
         Vector2Int pos = ant.position;
         if (ants.Contains(ant)) {
-            return false;
+            return true;
         }
         ants.Add(ant);
         grid[pos.x + gridSys.corner.x, pos.y + gridSys.corner.y] = ants.Count - 1;
@@ -81,13 +81,13 @@ public class Ants : MonoBehaviour {
             return (over, true); // No override, other error (no ant at starting position)
         }
 
-        (int cell, bool success) = GetGrid(start);
-        if (!success) {
+        (int cell, bool error) = GetGrid(start);
+        if (error) {
             return (over, true);
         }
 
-        success = SetGrid(end, cell);
-        if (!success) {
+        error = SetGrid(end, cell);
+        if (error) {
             return (over, true);
         }
 
