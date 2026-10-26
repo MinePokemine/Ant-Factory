@@ -36,23 +36,15 @@ public class Ants : MonoBehaviour {
             grid[arrayPos.x, arrayPos.y] = val;
             return false;
         } else {
+            Debug.Log("Array Position " + arrayPos + "not in bounds");
             return true;
         }
     }
     (int, bool) GetGrid(Vector2Int gridPos) {
-        if (gridSys.InBounds(gridPos)) {
-            return GetArr(ArrayPos(gridPos));
-        } else {
-            return (0, true);
-        }
+        return GetArr(ArrayPos(gridPos));
     }
     bool SetGrid(Vector2Int gridPos, int val) {
-        if (gridSys.InBounds(gridPos)) {
-            SetArr(ArrayPos(gridPos), val);
-            return true;
-        } else {
-            return false;
-        }
+        return SetArr(ArrayPos(gridPos), val);
     }
 
     // Public
