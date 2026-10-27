@@ -50,8 +50,8 @@ public class Ants : MonoBehaviour {
 
     // Public
     public (Ant, bool) GetAnt(Vector2Int pos) { // Grid Position -> Ant, Error
-        (int cell, bool success) = GetGrid(pos);
-        if (!success) return (null, true);
+        (int cell, bool error) = GetGrid(pos);
+        if (error) return (null, true);
         return (ants[cell], false);
     }
     public Ant[] GetAll() {
