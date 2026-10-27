@@ -28,7 +28,7 @@ public class Ants : MonoBehaviour {
             return (grid[arrayPos.x, arrayPos.y], false);
         } else {
             Debug.Log("Array Position out of bounds: " + arrayPos);
-            return (0, true);
+            return (-1, true);
         }
     }
     bool SetArr(Vector2Int arrayPos, int val) {
@@ -51,7 +51,7 @@ public class Ants : MonoBehaviour {
     // Public
     public (Ant, bool) GetAnt(Vector2Int pos) { // Grid Position -> Ant, Error
         (int cell, bool error) = GetGrid(pos);
-        if (error) return (null, true);
+        if (error || cell == -1) return (null, true);
         return (ants[cell], false);
     }
     public Ant[] GetAll() {
