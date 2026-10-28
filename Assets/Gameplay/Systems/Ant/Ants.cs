@@ -100,10 +100,16 @@ public class Ants : MonoBehaviour {
             Debug.Log("Error getting grid");
             return (over, true);
         }
+        ants[cell].position = end;
 
         error = SetGrid(end, cell);
         if (error) {
-            Debug.Log("Error Setting Grid");
+            Debug.Log("Error Setting End");
+            return (over, true);
+        }
+        error = SetGrid(start, -1);
+        if (error) {
+            Debug.Log("Error clearing start");
             return (over, true);
         }
 
