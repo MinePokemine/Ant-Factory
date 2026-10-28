@@ -5,6 +5,7 @@ public class BackForthAnt : Ant {
     protected override void UniqueTick(Tunnels tunnels) {
         Tunnel[] adjacent = tunnels.Touching(position);
         Debug.Log(adjacent.Length);
+        Debug.Log(previous);
         if (previous.dir == Direction.INVALID) {
             if (adjacent.Length == 0) {
                 Debug.Log("No Adjacent Tunnels");
@@ -29,8 +30,7 @@ public class BackForthAnt : Ant {
                 Debug.Log("Error moving along tunnel " + previous);
             }
         }
-        else if (adjacent[0].pos1 == previous.pos1 || adjacent[0].pos2 == previous.pos1
-                || adjacent[0].pos1 == previous.pos2 || adjacent[0].pos2 == previous.pos2 ) {
+        else if (previous.Touching(adjacent[0])) {
             Debug.Log("Moving along " + adjacent[1]);
 
             (bool over, bool error) = MoveAlong(adjacent[1], true);
@@ -40,8 +40,7 @@ public class BackForthAnt : Ant {
                 previous = adjacent[1];
             }
         }
-        else if (adjacent[1].pos1 == previous.pos1 || adjacent[1].pos2 == previous.pos1
-                || adjacent[1].pos1 == previous.pos2 || adjacent[1].pos2 == previous.pos2 ) {
+        else if (previous.Touching(adjacent[1])) {
             Debug.Log("Moving along " + adjacent[0]);
 
             (bool over, bool error) = MoveAlong(adjacent[0], true);

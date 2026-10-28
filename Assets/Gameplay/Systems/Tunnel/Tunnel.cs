@@ -39,5 +39,10 @@ public struct Tunnel : IEquatable<Tunnel> {
         return $"{pos1}, {pos2} along {dir}";
     }
 
+    public bool Touching(Tunnel other) {
+        return pos1 == other.pos1 || pos1 == other.pos2
+            || pos2 == other.pos1 || pos2 == other.pos2;
+    }
+
     public static Tunnel NULL = new Tunnel(Vector2Int.one * int.MaxValue, Direction.INVALID);
 }
