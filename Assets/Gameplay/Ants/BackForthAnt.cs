@@ -9,16 +9,19 @@ public class BackForthAnt : Ant {
             if (adjacent.Length == 0) {
                 Debug.Log("No Adjacent Tunnels");
             } else {
-                (bool over, bool error) = MoveAlong(adjacent[0]);
+                Debug.Log("Moving along " + adjacent[0]);
+                (bool over, bool error) = MoveAlong(adjacent[0], true);
                 if (error) {
                     Debug.Log("Error moving along tunnel " + adjacent[0]);
+                } else {
+                    previous = adjacent[0];
                 }
             }
         }
         else if (adjacent.Length > 2 || adjacent.Length == 1) {
             Debug.Log("Moving back along " + previous);
 
-            (bool over, bool error) = MoveAlong(previous);
+            (bool over, bool error) = MoveAlong(previous, true);
             if (error) {
                 Debug.Log("Error moving along tunnel " + previous);
             }
@@ -30,19 +33,26 @@ public class BackForthAnt : Ant {
                 || adjacent[0].pos1 == previous.pos2 || adjacent[0].pos2 == previous.pos2 ) {
             Debug.Log("Moving along " + adjacent[0]);
 
-            (bool over, bool error) = MoveAlong(adjacent[0]);
+            (bool over, bool error) = MoveAlong(adjacent[0], true);
             if (error) {
                 Debug.Log("Error moving along tunnel " + adjacent[0]);
+            } else {
+                previous = adjacent[0];
             }
         }
         else if (adjacent[1].pos1 == previous.pos1 || adjacent[1].pos2 == previous.pos1
                 || adjacent[1].pos1 == previous.pos2 || adjacent[1].pos2 == previous.pos2 ) {
             Debug.Log("Moving along " + adjacent[1]);
 
-            (bool over, bool error) = MoveAlong(adjacent[1]);
+            (bool over, bool error) = MoveAlong(adjacent[1], true);
             if (error) {
                 Debug.Log("Error moving along tunnel " + adjacent[1]);
+            } else {
+                previous = adjacent[1];
             }
+        }
+        else {
+            Debug.Log("Nothing");
         }
     }
 }
