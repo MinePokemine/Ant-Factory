@@ -18,7 +18,10 @@ public class BackForthAnt : Ant {
                 }
             }
         }
-        else if (adjacent.Length > 2 || adjacent.Length == 1) {
+        else if (adjacent.Length == 0) {
+            Debug.Log("No Adjacent Tunnels");
+        }
+        else if (adjacent.Length != 2) {
             Debug.Log("Moving back along " + previous);
 
             (bool over, bool error) = MoveAlong(previous, true);
@@ -26,22 +29,8 @@ public class BackForthAnt : Ant {
                 Debug.Log("Error moving along tunnel " + previous);
             }
         }
-        else if (adjacent.Length == 0) {
-            Debug.Log("No Adjacent Tunnels");
-        }
         else if (adjacent[0].pos1 == previous.pos1 || adjacent[0].pos2 == previous.pos1
                 || adjacent[0].pos1 == previous.pos2 || adjacent[0].pos2 == previous.pos2 ) {
-            Debug.Log("Moving along " + adjacent[0]);
-
-            (bool over, bool error) = MoveAlong(adjacent[0], true);
-            if (error) {
-                Debug.Log("Error moving along tunnel " + adjacent[0]);
-            } else {
-                previous = adjacent[0];
-            }
-        }
-        else if (adjacent[1].pos1 == previous.pos1 || adjacent[1].pos2 == previous.pos1
-                || adjacent[1].pos1 == previous.pos2 || adjacent[1].pos2 == previous.pos2 ) {
             Debug.Log("Moving along " + adjacent[1]);
 
             (bool over, bool error) = MoveAlong(adjacent[1], true);
@@ -49,6 +38,17 @@ public class BackForthAnt : Ant {
                 Debug.Log("Error moving along tunnel " + adjacent[1]);
             } else {
                 previous = adjacent[1];
+            }
+        }
+        else if (adjacent[1].pos1 == previous.pos1 || adjacent[1].pos2 == previous.pos1
+                || adjacent[1].pos1 == previous.pos2 || adjacent[1].pos2 == previous.pos2 ) {
+            Debug.Log("Moving along " + adjacent[0]);
+
+            (bool over, bool error) = MoveAlong(adjacent[0], true);
+            if (error) {
+                Debug.Log("Error moving along tunnel " + adjacent[0]);
+            } else {
+                previous = adjacent[0];
             }
         }
         else {
