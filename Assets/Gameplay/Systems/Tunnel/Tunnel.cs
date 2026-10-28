@@ -44,5 +44,15 @@ public struct Tunnel : IEquatable<Tunnel> {
             || pos2 == other.pos1 || pos2 == other.pos2;
     }
 
+    public bool Has(Vector2Int pos) {
+        return pos == pos1 || pos == pos2;
+    }
+
+    public Vector2Int Other(Vector2Int pos) {
+        if (pos == pos1) return pos2;
+        if (pos == pos2) return pos1;
+        return Vector2Int.one * int.MaxValue;
+    }
+
     public static Tunnel NULL = new Tunnel(Vector2Int.one * int.MaxValue, Direction.INVALID);
 }

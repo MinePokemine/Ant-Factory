@@ -30,8 +30,8 @@ public class BackForthAnt : Ant {
                 Debug.Log("Error moving along tunnel " + previous);
             }
         }
-        else if (previous.Touching(adjacent[0])) {
-            Debug.Log("Moving along " + adjacent[1]);
+        else if (adjacent[0].Has(previous.Other(position))) {
+            Debug.Log("0Moving along " + adjacent[1]);
 
             (bool over, bool error) = MoveAlong(adjacent[1], true);
             if (error) {
@@ -40,8 +40,8 @@ public class BackForthAnt : Ant {
                 previous = adjacent[1];
             }
         }
-        else if (previous.Touching(adjacent[1])) {
-            Debug.Log("Moving along " + adjacent[0]);
+        else if (adjacent[1].Has(previous.Other(position))) {
+            Debug.Log("1Moving along " + adjacent[0]);
 
             (bool over, bool error) = MoveAlong(adjacent[0], true);
             if (error) {
