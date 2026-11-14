@@ -1,16 +1,18 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ants : MonoBehaviour {
-    public GridSystem gridSys;
+public class AntSystem : MonoBehaviour {
+    public LevelManager manager;
+
     public List<Ant> ants {get; private set;} = new();
     public int[,] grid {get; private set;}
     public Tunnels tunnels;
 
     void OnEnable() {
-        grid = new int[gridSys.corner.x * 2, gridSys.corner.y * 2];
-        for (int x = 0; x < gridSys.corner.x * 2; x++) {
-            for (int y = 0; y < gridSys.corner.y * 2; y++) {
+        grid = new int[manager.grid.corner.x * 2, manager.grid.corner.y * 2];
+        for (int x = 0; x < manager.grid.corner.x * 2; x++) {
+            for (int y = 0; y < manager.grid.corner.y * 2; y++) {
                 grid[x,y] = -1;
             }
         }
@@ -18,10 +20,10 @@ public class Ants : MonoBehaviour {
 
     // Helpers
     Vector2Int ArrayPos(Vector2Int gridPos) {
-        return gridPos + gridSys.corner;
+        return gridPos + manager.grid.corner;
     }
     Vector2Int GridPos(Vector2Int arrayPos) {
-        return arrayPos - gridSys.corner;
+        return arrayPos - manager.grid.corner;
     }
     (int, bool) GetArr(Vector2Int arrayPos) {
         if (InBounds(arrayPos)) {
@@ -117,6 +119,19 @@ public class Ants : MonoBehaviour {
     }
 
     public bool InBounds(Vector2Int arrayPos) {
-        return gridSys.InBounds(GridPos(arrayPos));
+        return manager.grid.InBounds(GridPos(arrayPos));
+    }
+
+    public void Tick() {
+        foreach (Ant ant in GetAll()) {
+            try {
+                ant.Tick(manager.tunnels);
+            } catch (SimulationFailure e) {
+                manager.simulation.SimulationFailure(e);
+                return;
+            } catch (Exception e) {
+                manager.simulation.SimulationFailure(new ExceptionFailure(ant, e));
+            }
+        }
     }
 }

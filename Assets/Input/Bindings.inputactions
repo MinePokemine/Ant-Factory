@@ -17,7 +17,7 @@
                     "priority": 0
                 },
                 {
-                    "name": "DigTunnel",
+                    "name": "Place",
                     "type": "Button",
                     "id": "34590190-3671-4893-8c28-cc6a2b54a725",
                     "expectedControlType": "",
@@ -27,9 +27,29 @@
                     "priority": 0
                 },
                 {
-                    "name": "CollapseTunnel",
+                    "name": "Remove",
                     "type": "Button",
                     "id": "65a75850-6e02-47b8-97f2-8ccae0fd5444",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "SwitchMode",
+                    "type": "Button",
+                    "id": "3cfbc538-4291-4301-b17f-43fc3aecf9c2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Simulate",
+                    "type": "Button",
+                    "id": "62ca4595-c597-45c8-8c0f-cd18861ccdba",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -56,7 +76,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "DigTunnel",
+                    "action": "Place",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -67,7 +87,29 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "CollapseTunnel",
+                    "action": "Remove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6c540037-0e71-419e-94b7-037df796be8d",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchMode",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "04081ffe-e4c0-4d83-ba2c-de9066b1d8c2",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Simulate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

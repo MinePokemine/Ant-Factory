@@ -1,3 +1,4 @@
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class BackForthAnt : Ant {
@@ -13,7 +14,7 @@ public class BackForthAnt : Ant {
                 Debug.Log("Moving along " + adjacent[0]);
                 (bool over, bool error) = MoveAlong(adjacent[0], true);
                 if (error) {
-                    Debug.Log("Error moving along tunnel " + adjacent[0]);
+                    throw new ErrorFailure(this, "Error moving along adjacent tunnel (no previous, chosing) " + adjacent[0]);
                 } else {
                     previous = adjacent[0];
                 }
@@ -27,7 +28,7 @@ public class BackForthAnt : Ant {
 
             (bool over, bool error) = MoveAlong(previous, true);
             if (error) {
-                Debug.Log("Error moving along tunnel " + previous);
+                throw new ErrorFailure(this, "Error moving along previous tunnel " + previous);
             }
         }
         else if (adjacent[0].Has(previous.Other(position))) {
@@ -35,7 +36,7 @@ public class BackForthAnt : Ant {
 
             (bool over, bool error) = MoveAlong(adjacent[1], true);
             if (error) {
-                Debug.Log("Error moving along tunnel " + adjacent[1]);
+                throw new ErrorFailure(this, "Error moving along adjacent[1] tunnel " + adjacent[1]);
             } else {
                 previous = adjacent[1];
             }
@@ -45,7 +46,7 @@ public class BackForthAnt : Ant {
 
             (bool over, bool error) = MoveAlong(adjacent[0], true);
             if (error) {
-                Debug.Log("Error moving along tunnel " + adjacent[0]);
+                throw new ErrorFailure(this, "Error moving along adjacent[0] tunnel " + adjacent[0]);
             } else {
                 previous = adjacent[0];
             }

@@ -103,7 +103,7 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""priority"": 0
                 },
                 {
-                    ""name"": ""DigTunnel"",
+                    ""name"": ""Place"",
                     ""type"": ""Button"",
                     ""id"": ""34590190-3671-4893-8c28-cc6a2b54a725"",
                     ""expectedControlType"": """",
@@ -113,9 +113,29 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""priority"": 0
                 },
                 {
-                    ""name"": ""CollapseTunnel"",
+                    ""name"": ""Remove"",
                     ""type"": ""Button"",
                     ""id"": ""65a75850-6e02-47b8-97f2-8ccae0fd5444"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
+                    ""name"": ""SwitchMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""3cfbc538-4291-4301-b17f-43fc3aecf9c2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false,
+                    ""priority"": 0
+                },
+                {
+                    ""name"": ""Simulate"",
+                    ""type"": ""Button"",
+                    ""id"": ""62ca4595-c597-45c8-8c0f-cd18861ccdba"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -142,7 +162,7 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""DigTunnel"",
+                    ""action"": ""Place"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -153,7 +173,29 @@ public partial class @Key: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
-                    ""action"": ""CollapseTunnel"",
+                    ""action"": ""Remove"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c540037-0e71-419e-94b7-037df796be8d"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04081ffe-e4c0-4d83-ba2c-de9066b1d8c2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Simulate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -226,8 +268,10 @@ public partial class @Key: IInputActionCollection2, IDisposable
         // Solving
         m_Solving = asset.FindActionMap("Solving", throwIfNotFound: true);
         m_Solving_CurserPosition = m_Solving.FindAction("CurserPosition", throwIfNotFound: true);
-        m_Solving_DigTunnel = m_Solving.FindAction("DigTunnel", throwIfNotFound: true);
-        m_Solving_CollapseTunnel = m_Solving.FindAction("CollapseTunnel", throwIfNotFound: true);
+        m_Solving_Place = m_Solving.FindAction("Place", throwIfNotFound: true);
+        m_Solving_Remove = m_Solving.FindAction("Remove", throwIfNotFound: true);
+        m_Solving_SwitchMode = m_Solving.FindAction("SwitchMode", throwIfNotFound: true);
+        m_Solving_Simulate = m_Solving.FindAction("Simulate", throwIfNotFound: true);
     }
 
     ~@Key()
@@ -309,8 +353,10 @@ public partial class @Key: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Solving;
     private List<ISolvingActions> m_SolvingActionsCallbackInterfaces = new List<ISolvingActions>();
     private readonly InputAction m_Solving_CurserPosition;
-    private readonly InputAction m_Solving_DigTunnel;
-    private readonly InputAction m_Solving_CollapseTunnel;
+    private readonly InputAction m_Solving_Place;
+    private readonly InputAction m_Solving_Remove;
+    private readonly InputAction m_Solving_SwitchMode;
+    private readonly InputAction m_Solving_Simulate;
     /// <summary>
     /// Provides access to input actions defined in input action map "Solving".
     /// </summary>
@@ -327,13 +373,21 @@ public partial class @Key: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @CurserPosition => m_Wrapper.m_Solving_CurserPosition;
         /// <summary>
-        /// Provides access to the underlying input action "Solving/DigTunnel".
+        /// Provides access to the underlying input action "Solving/Place".
         /// </summary>
-        public InputAction @DigTunnel => m_Wrapper.m_Solving_DigTunnel;
+        public InputAction @Place => m_Wrapper.m_Solving_Place;
         /// <summary>
-        /// Provides access to the underlying input action "Solving/CollapseTunnel".
+        /// Provides access to the underlying input action "Solving/Remove".
         /// </summary>
-        public InputAction @CollapseTunnel => m_Wrapper.m_Solving_CollapseTunnel;
+        public InputAction @Remove => m_Wrapper.m_Solving_Remove;
+        /// <summary>
+        /// Provides access to the underlying input action "Solving/SwitchMode".
+        /// </summary>
+        public InputAction @SwitchMode => m_Wrapper.m_Solving_SwitchMode;
+        /// <summary>
+        /// Provides access to the underlying input action "Solving/Simulate".
+        /// </summary>
+        public InputAction @Simulate => m_Wrapper.m_Solving_Simulate;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -363,12 +417,18 @@ public partial class @Key: IInputActionCollection2, IDisposable
             @CurserPosition.started += instance.OnCurserPosition;
             @CurserPosition.performed += instance.OnCurserPosition;
             @CurserPosition.canceled += instance.OnCurserPosition;
-            @DigTunnel.started += instance.OnDigTunnel;
-            @DigTunnel.performed += instance.OnDigTunnel;
-            @DigTunnel.canceled += instance.OnDigTunnel;
-            @CollapseTunnel.started += instance.OnCollapseTunnel;
-            @CollapseTunnel.performed += instance.OnCollapseTunnel;
-            @CollapseTunnel.canceled += instance.OnCollapseTunnel;
+            @Place.started += instance.OnPlace;
+            @Place.performed += instance.OnPlace;
+            @Place.canceled += instance.OnPlace;
+            @Remove.started += instance.OnRemove;
+            @Remove.performed += instance.OnRemove;
+            @Remove.canceled += instance.OnRemove;
+            @SwitchMode.started += instance.OnSwitchMode;
+            @SwitchMode.performed += instance.OnSwitchMode;
+            @SwitchMode.canceled += instance.OnSwitchMode;
+            @Simulate.started += instance.OnSimulate;
+            @Simulate.performed += instance.OnSimulate;
+            @Simulate.canceled += instance.OnSimulate;
         }
 
         /// <summary>
@@ -383,12 +443,18 @@ public partial class @Key: IInputActionCollection2, IDisposable
             @CurserPosition.started -= instance.OnCurserPosition;
             @CurserPosition.performed -= instance.OnCurserPosition;
             @CurserPosition.canceled -= instance.OnCurserPosition;
-            @DigTunnel.started -= instance.OnDigTunnel;
-            @DigTunnel.performed -= instance.OnDigTunnel;
-            @DigTunnel.canceled -= instance.OnDigTunnel;
-            @CollapseTunnel.started -= instance.OnCollapseTunnel;
-            @CollapseTunnel.performed -= instance.OnCollapseTunnel;
-            @CollapseTunnel.canceled -= instance.OnCollapseTunnel;
+            @Place.started -= instance.OnPlace;
+            @Place.performed -= instance.OnPlace;
+            @Place.canceled -= instance.OnPlace;
+            @Remove.started -= instance.OnRemove;
+            @Remove.performed -= instance.OnRemove;
+            @Remove.canceled -= instance.OnRemove;
+            @SwitchMode.started -= instance.OnSwitchMode;
+            @SwitchMode.performed -= instance.OnSwitchMode;
+            @SwitchMode.canceled -= instance.OnSwitchMode;
+            @Simulate.started -= instance.OnSimulate;
+            @Simulate.performed -= instance.OnSimulate;
+            @Simulate.canceled -= instance.OnSimulate;
         }
 
         /// <summary>
@@ -502,18 +568,32 @@ public partial class @Key: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnCurserPosition(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "DigTunnel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Place" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDigTunnel(InputAction.CallbackContext context);
+        void OnPlace(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "CollapseTunnel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Remove" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnCollapseTunnel(InputAction.CallbackContext context);
+        void OnRemove(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchMode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchMode(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Simulate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSimulate(InputAction.CallbackContext context);
     }
 }

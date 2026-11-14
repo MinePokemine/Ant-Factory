@@ -1,11 +1,14 @@
 using System;
 using UnityEngine;
 
-public class Ticker : MonoBehaviour {
-    public Ants ants;
-    public Tunnels tunnels;
+public class SimulationManager : MonoBehaviour {
+    public LevelManager manager;
+
     public float tickLength;
     float time = 0;
+
+    public Action<SimulationFailure> SimulationFailure;
+    public Action<int> SimulationSuccess;
 
     void Update() {
         time += Time.deltaTime;
@@ -16,8 +19,6 @@ public class Ticker : MonoBehaviour {
     }
 
     void Tick() {
-        foreach (Ant ant in ants.GetAll()) {
-            ant.Tick(tunnels);
-        }
+        manager.ants.Tick();
     }
 }

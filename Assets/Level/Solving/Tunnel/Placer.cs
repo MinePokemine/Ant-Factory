@@ -1,10 +1,8 @@
 using UnityEngine;
 
 public class TunnelPlacer : MonoBehaviour {
-    public Tunnels tunnels;
-    public GridSystem grid;
+    public SolvingManager manager;
     public Camera main;
-    public InputHandler input;
 
     Vector2Int curr = Vector2Int.one * int.MaxValue;
 
@@ -15,18 +13,18 @@ public class TunnelPlacer : MonoBehaviour {
     }
 
     void Update() {
-        if (input.digging) { // Placements
-            Vector2 worldPos = main.ScreenToWorldPoint(input.mousePos);
-            Vector2Int pos = grid.Abstract(worldPos);
+        if (manager.digging) { // Placements
+            Vector2 worldPos = main.ScreenToWorldPoint(manager.mousePos);
+            Vector2Int pos = manager.manager.grid.Abstract(worldPos);
             //Debug.Log("Digging at grid " + pos + " - world" + worldPos);
 
             if (DirectionEx.GetDirection(curr - pos) == Direction.INVALID) {
                 if (curr != pos) Debug.Log("Non-equal invalid direction - " + (curr - pos) + " from " + curr + " and " + pos);
             }
 
-            else if (grid.InBounds(pos) && grid.InBounds(curr)) {
+            else if (manager.manager.grid.InBounds(pos) && manager.manager.grid.InBounds(curr)) {
                 Debug.Log("New Tunnel");
-                tunnels.Add(new Tunnel(curr, pos));
+                manager.manager.tunnels.Add(new Tunnel(curr, pos));
             }
 
             curr = pos;
