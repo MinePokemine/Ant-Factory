@@ -8,8 +8,9 @@ public abstract class Ant : MonoBehaviour {
 
     void Start() {
         startingPosition = manager.manager.grid.Abstract(transform.position);
-        Debug.Log(startingPosition);
         position = startingPosition;
+        transform.position = manager.manager.grid.Get3D(position);
+
         bool error = manager.manager.ants.Add(this);
         if (error) {
             Debug.Log("Error adding ant to ants");
