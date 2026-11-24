@@ -9,6 +9,7 @@ public abstract class Ant : MonoBehaviour {
     void Start() {
         startingPosition = manager.manager.grid.Abstract(transform.position);
         Debug.Log(startingPosition);
+        position = startingPosition;
         bool error = manager.manager.ants.Add(this);
         if (error) {
             Debug.Log("Error adding ant to ants");
@@ -36,10 +37,17 @@ public abstract class Ant : MonoBehaviour {
         return (false, true);
     }
 
-    protected abstract void UniqueTick(Tunnels tunnels);
+    protected abstract void UniqueTick();
+    protected abstract void UniqueReset();
 
-    public void Tick(Tunnels tunnels) {
-        UniqueTick(tunnels);
+    public void Tick() {
+        UniqueTick();
+        transform.position = manager.manager.grid.Get3D(position);
+    }
+
+    public void Reset() {
+        UniqueReset();
+        Move(startingPosition, false);
         transform.position = manager.manager.grid.Get3D(position);
     }
 }

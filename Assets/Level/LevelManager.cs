@@ -9,26 +9,36 @@ public class LevelManager : MonoBehaviour {
     public SolvingManager solving;
     public SimulationManager simulation;
 
+    public Key key;
+
     public State state = State.SOLVING;
 
     void OnEnable() {
-        solving.enabled = true;
-        simulation.enabled = false;
+        key = new Key();
+        key.Enable();
+        
+        solving.gameObject.SetActive(true);
 
         solving.actions.Simulate.performed += Simulate;
         simulation.SimulationFailure += SimFail;
     }
 
     void Simulate(InputAction.CallbackContext context) {
-        state = State.SIMULATING;
-        solving.enabled = false;
-        simulation.enabled = true;
+        if (state != State.SIMULATING) {
+            state = State.SIMULATING;
+            solving.gameObject.SetActive(false);
+            simulation.gameObject.SetActive(true);
+        }
     }
 
     void SimFail(SimulationFailure failure) {
-        Debug.Log("Simulation Failed: " + failure.GetDisplayMessage());
-        simulation.enabled = false;
-        solving.enabled = true;
+        if (state == State.SIMULATING) {
+            simulation.Reset();
+            Debug.Log("Simulation Failed: " + failure.GetDisplayMessage());
+            state = State.SOLVING;
+            simulation.gameObject.SetActive(false);
+            solving.gameObject.SetActive(true);
+        }
     }
 
 

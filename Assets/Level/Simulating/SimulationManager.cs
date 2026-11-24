@@ -21,4 +21,10 @@ public class SimulationManager : MonoBehaviour {
     void Tick() {
         manager.ants.Tick();
     }
+
+    public void Reset() {
+        foreach (Ant ant in manager.ants.ants) {
+            ant.Reset();
+        }
+    }
 }

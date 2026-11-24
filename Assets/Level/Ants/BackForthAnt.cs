@@ -3,8 +3,13 @@ using UnityEngine;
 
 public class BackForthAnt : Ant {
     Tunnel previous = Tunnel.NULL;
-    protected override void UniqueTick(Tunnels tunnels) {
-        Tunnel[] adjacent = tunnels.Touching(position);
+
+    protected override void UniqueReset() {
+        previous = Tunnel.NULL;
+    }
+
+    protected override void UniqueTick() {
+        Tunnel[] adjacent = manager.manager.tunnels.Touching(position);
         Debug.Log(adjacent.Length);
         Debug.Log(previous);
         if (previous.dir == Direction.INVALID) {

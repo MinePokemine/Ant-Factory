@@ -7,7 +7,6 @@ public class AntSystem : MonoBehaviour {
 
     public List<Ant> ants {get; private set;} = new();
     public int[,] grid {get; private set;}
-    public Tunnels tunnels;
 
     void OnEnable() {
         grid = new int[manager.grid.corner.x * 2, manager.grid.corner.y * 2];
@@ -27,7 +26,11 @@ public class AntSystem : MonoBehaviour {
     }
     (int, bool) GetArr(Vector2Int arrayPos) {
         if (InBounds(arrayPos)) {
-            return (grid[arrayPos.x, arrayPos.y], false);
+            try {
+                return (grid[arrayPos.x, arrayPos.y], false);
+            } catch (Exception) {
+                return (-1, true);
+            }
         } else {
             Debug.Log("Array Position out of bounds: " + arrayPos);
             return (-1, true);
@@ -125,7 +128,7 @@ public class AntSystem : MonoBehaviour {
     public void Tick() {
         foreach (Ant ant in GetAll()) {
             try {
-                ant.Tick(manager.tunnels);
+                ant.Tick();
             } catch (SimulationFailure e) {
                 manager.simulation.SimulationFailure(e);
                 return;

@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TunnelRenderer : MonoBehaviour {
-    public Tunnels tunnels;
-    public GridSystem grid;
+    public LevelManager manager;
+
     List<LineRenderer> rs = new();
     public float UpdateTime;
     public float Width;
@@ -27,14 +27,14 @@ public class TunnelRenderer : MonoBehaviour {
             Destroy(r.gameObject);
         }
         rs.Clear();
-        foreach (Tunnel t in tunnels.GetArray()) {
+        foreach (Tunnel t in manager.tunnels.GetArray()) {
             GameObject g = new GameObject();
             g.transform.parent = transform;
             LineRenderer r = g.AddComponent<LineRenderer>();
             rs.Add(r);
 
-            r.SetPosition(0, grid.Get3D(t.pos1));
-            r.SetPosition(1, grid.Get3D(t.pos2));
+            r.SetPosition(0, manager.grid.Get3D(t.pos1));
+            r.SetPosition(1, manager.grid.Get3D(t.pos2));
 
             r.startWidth = Width;
             r.endWidth = Width;

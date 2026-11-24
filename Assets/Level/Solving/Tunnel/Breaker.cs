@@ -1,10 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Breaker : MonoBehaviour {
+public class TunnelBreaker : MonoBehaviour {
     public SolvingManager manager;
 
-    public GridSystem grid;
     public Camera main;
 
     void Start() {
@@ -16,7 +15,7 @@ public class Breaker : MonoBehaviour {
 
     void Collapse(InputAction.CallbackContext cont) {
         Vector3 world = main.ScreenToWorldPoint(manager.mousePos);
-        Vector2Int pos = grid.Abstract(world);
+        Vector2Int pos = manager.manager.grid.Abstract(world);
         manager.manager.tunnels.Remove(manager.manager.tunnels.Touching(pos));
     }
 }
